@@ -1,0 +1,12 @@
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.exe
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.deps.json
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.runtimeconfig.json
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.runtimeconfig.dev.json
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.dll
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.pdb
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.AssemblyInfoInputs.cache
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.AssemblyInfo.cs
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.csproj.CoreCompileInputs.cache
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.dll
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.pdb
+C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.genruntimeconfig.cache
