@@ -2,6 +2,7 @@
 using ByteBank.Funcionarios;
 using ByteBank.Sistemas;
 using System;
+using System.IO;
 
 namespace Byte_Bank
 {
@@ -9,9 +10,10 @@ namespace Byte_Bank
     {
         static void Main(string[] args)
         {
-            CalcularBonificacao();
-            UsarSistema();
+            // CalcularBonificacao();
+            // UsarSistema();
             TransferirSaldo();
+            //CarregarContas();
             Console.ReadLine();
         }
 
@@ -65,52 +67,79 @@ namespace Byte_Bank
 
         public static void TransferirSaldo()
         {
-            ContaCorrente contaBruno = new ContaCorrente(876, 86712540);
-            Cliente cliente = new Cliente();
-
-            cliente.Nome = "Guilherme";
-            cliente.CPF = "434.564.879-20";
-            cliente.Profissao = "Desenvolvedor";
-
-            contaBruno.Titular = cliente;
-            contaBruno.Saldo += 4500;
-
-            double valorDeposito = 500;
-            double valorSaque = 755;
-            double valorTransferido = 500;
-
-            contaBruno.Depositar(valorDeposito);
-            bool resultadoSaque = contaBruno.Sacar(valorSaque);
-
-            if (!resultadoSaque)
+            try
             {
-                Console.WriteLine("Saque não aprovado.");
+                ContaCorrente contaBruno = new ContaCorrente(876, 86712540);
+                Cliente cliente = new Cliente();
+
+                cliente.Nome = "Guilherme";
+                cliente.CPF = "434.564.879-20";
+                cliente.Profissao = "Desenvolvedor";
+
+                contaBruno.Titular = cliente;
+
+                double valorDeposito = 500;
+                double valorSaque = 5;
+                double valorTransferido = 10;
+
+                contaBruno.Depositar(valorDeposito);
+                contaBruno.Sacar(valorSaque);
+
+                Console.WriteLine(contaBruno.Titular.Nome + " Realizou um saque de " + valorSaque);
+                Console.WriteLine("Seu novo saldo é " + contaBruno.Saldo);
+
+                Console.WriteLine("--------------------------------------------------");
+
+                ContaCorrente contaGabriela = new ContaCorrente(875, 86755540);
+                Cliente clienteGabriela = new Cliente();
+
+                clienteGabriela.Nome = "Gabriela";
+                clienteGabriela.CPF = "434.564.820-20";
+                clienteGabriela.Profissao = "Teste";
+
+                contaGabriela.Titular = clienteGabriela;
+                contaBruno.Transferir(valorTransferido, contaGabriela);
+
+                Console.WriteLine("--------------------------------------------------");
+
+                Console.WriteLine("Valor de " + valorTransferido + " transferido da conta do " + contaBruno.Titular.Nome + " para a conta da " + contaGabriela.Titular.Nome);
+                Console.WriteLine("Transferência recebida, seu novo saldo é " + contaGabriela.Saldo);
+
+                Console.WriteLine("--------------------------------------------------");
+
+                Console.WriteLine("Valor da taxa de opreção  " + ContaCorrente.TaxaOperacao);
+
+                Console.WriteLine("Números de contas no Byte Bank " + ContaCorrente.TotalDeContasCriadas);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Argumento com problema: " + ex.ParamName);
+                Console.WriteLine("Ocorreu uma exceção do tipo ArgumentException.");
+                Console.WriteLine(ex.Message);
+            }
+            catch (OperacaoFinanceiraException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Execução finalizada. Tecle enter para sair.");
                 Console.ReadLine();
             }
+        }
 
-            Console.WriteLine(contaBruno.Titular.Nome + " Realizou um saque de " + valorSaque);
-            Console.WriteLine("Seu novo saldo é " + contaBruno.Saldo);
-
-            Console.WriteLine("--------------------------------------------------");
-
-            ContaCorrente contaGabriela = new ContaCorrente(875, 86755540);
-            Cliente clienteGabriela = new Cliente();
-
-            clienteGabriela.Nome = "Gabriela";
-            clienteGabriela.CPF = "434.564.820-20";
-            clienteGabriela.Profissao = "Teste";
-
-            contaGabriela.Titular = clienteGabriela;
-            contaBruno.Transferir(valorTransferido, contaGabriela);
-
-            Console.WriteLine("--------------------------------------------------");
-
-            Console.WriteLine("Valor de " + valorTransferido + " transferido da conta do " + contaBruno.Titular.Nome + " para a conta da " + contaGabriela.Titular.Nome);
-            Console.WriteLine("Transferência recebida, seu novo saldo é " + contaGabriela.Saldo);
-
-            Console.WriteLine("--------------------------------------------------");
-
-            Console.WriteLine("Números de contas no Byte Bank " + ContaCorrente.TotalDeContasCriadas);
+        private static void CarregarContas()
+        {
+            using (LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt"))
+            {
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
+            }
         }
     }
 }
