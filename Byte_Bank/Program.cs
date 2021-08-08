@@ -10,10 +10,11 @@ namespace Byte_Bank
     {
         static void Main(string[] args)
         {
-            // CalcularBonificacao();
-            // UsarSistema();
+            CalcularBonificacao();
+            UsarSistema();
             TransferirSaldo();
-            //CarregarContas();
+            CarregarContas();
+            ListarContas();
             Console.ReadLine();
         }
 
@@ -139,6 +140,40 @@ namespace Byte_Bank
                 leitor.LerProximaLinha();
                 leitor.LerProximaLinha();
                 leitor.LerProximaLinha();
+            }
+        }
+
+        private static void ListarContas()
+        {
+            ListaDeContaCorrente lista = new ListaDeContaCorrente();
+
+            ContaCorrente contaLuiz = new ContaCorrente(1111, 111111);
+
+            ContaCorrente[] contas = new ContaCorrente[]
+            {
+                new ContaCorrente(874, 7840087),
+                new ContaCorrente(875, 7845787),
+                new ContaCorrente(876, 7845387),
+                new ContaCorrente(877, 78457877)
+            };
+
+            lista.AdicionarVarios(contas);
+
+
+            lista.AdicionarVarios(
+                new ContaCorrente(874, 7840087),
+                new ContaCorrente(875, 7845787),
+                new ContaCorrente(876, 7845387),
+                new ContaCorrente(877, 78457877)
+            );
+
+            lista.Adicionar(contaLuiz);
+            
+
+            for (int i = 0; i < lista.Tamanho; i++)
+            {
+                ContaCorrente itemAtual = lista.GetItemNoIndice(i);
+                Console.WriteLine($"Item na Posição {i} = Conta {itemAtual.Numero} / {itemAtual.Agencia}");
             }
         }
     }

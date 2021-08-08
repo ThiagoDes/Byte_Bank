@@ -11,3 +11,16 @@ C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Ban
 C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.dll
 C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.pdb
 C:\Users\Fusion\source\repos\ByteBank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.genruntimeconfig.cache
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.exe
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.deps.json
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.runtimeconfig.json
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.runtimeconfig.dev.json
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.dll
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\bin\Debug\netcoreapp3.1\Byte_Bank.pdb
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.csproj.AssemblyReference.cache
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.AssemblyInfoInputs.cache
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.AssemblyInfo.cs
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.csproj.CoreCompileInputs.cache
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.dll
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.pdb
+C:\Users\Thiago\source\repos\Byte_Bank\Byte_Bank\obj\Debug\netcoreapp3.1\Byte_Bank.genruntimeconfig.cache
