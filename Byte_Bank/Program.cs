@@ -1,8 +1,11 @@
-﻿using ByteBank;
+﻿using Byte_Bank.Comparadores;
+using Byte_Bank.Extensoes;
+using ByteBank;
 using ByteBank.Funcionarios;
 using ByteBank.Sistemas;
 using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Byte_Bank
 {
@@ -10,27 +13,28 @@ namespace Byte_Bank
     {
         static void Main(string[] args)
         {
-            CalcularBonificacao();
-            UsarSistema();
-            TransferirSaldo();
-            CarregarContas();
-            ListarContas();
+            // CalcularBonificacao();
+            // UsarSistema();
+            // TransferirSaldo();
+            // CarregarContas();
+            // ListarContas();
+            OrdernaContas();
             Console.ReadLine();
         }
 
         public static void UsarSistema()
         {
-            SistemaInterno sistemaInterno = new SistemaInterno();
+            var sistemaInterno = new SistemaInterno();
 
-            Diretor roberta = new Diretor(5000, "159.753.398-04");
+            var roberta = new Diretor(5000, "159.753.398-04");
             roberta.Nome = "Roberta";
             roberta.Senha = "123";
 
-            GerenteDeConta camila = new GerenteDeConta(4000, "326.985.628-89");
+            var camila = new GerenteDeConta(4000, "326.985.628-89");
             camila.Nome = "Camila";
             camila.Senha = "abc";
 
-            ParceiroComercial parceiro = new ParceiroComercial();
+            var parceiro = new ParceiroComercial();
             parceiro.Senha = "123456";
 
             sistemaInterno.Logar(roberta, "123");
@@ -40,21 +44,21 @@ namespace Byte_Bank
 
         public static void CalcularBonificacao()
         {
-            GerenciadorBonificacao gerenciadorBonificacao = new GerenciadorBonificacao();
+            var gerenciadorBonificacao = new GerenciadorBonificacao();
 
-            Funcionario pedro = new Designer(3000, "833.222.048-39");
+            var pedro = new Designer(3000, "833.222.048-39");
             pedro.Nome = "Pedro";
 
-            Funcionario roberta = new Diretor(5000, "159.753.398-04");
+            var roberta = new Diretor(5000, "159.753.398-04");
             roberta.Nome = "Roberta";
 
-            Funcionario igor = new Auxiliar(2000, "981.198.778-53");
+            var igor = new Auxiliar(2000, "981.198.778-53");
             igor.Nome = "Igor";
 
-            Funcionario camila = new GerenteDeConta(4000, "326.985.628-89");
+            var camila = new GerenteDeConta(4000, "326.985.628-89");
             camila.Nome = "Camila";
 
-            Desenvolvedor guilherme = new Desenvolvedor(3000, "456.175.468-20");
+            var guilherme = new Desenvolvedor(3000, "456.175.468-20");
             guilherme.Nome = "Guilherme";
 
             gerenciadorBonificacao.Registrar(pedro);
@@ -70,7 +74,7 @@ namespace Byte_Bank
         {
             try
             {
-                ContaCorrente contaBruno = new ContaCorrente(876, 86712540);
+                var contaBruno = new ContaCorrente(876, 86712540);
                 Cliente cliente = new Cliente();
 
                 cliente.Nome = "Guilherme";
@@ -91,8 +95,8 @@ namespace Byte_Bank
 
                 Console.WriteLine("--------------------------------------------------");
 
-                ContaCorrente contaGabriela = new ContaCorrente(875, 86755540);
-                Cliente clienteGabriela = new Cliente();
+                var contaGabriela = new ContaCorrente(875, 86755540);
+                var clienteGabriela = new Cliente();
 
                 clienteGabriela.Nome = "Gabriela";
                 clienteGabriela.CPF = "434.564.820-20";
@@ -135,7 +139,7 @@ namespace Byte_Bank
 
         private static void CarregarContas()
         {
-            using (LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt"))
+            using (var leitor = new LeitorDeArquivo("contas.txt"))
             {
                 leitor.LerProximaLinha();
                 leitor.LerProximaLinha();
@@ -145,11 +149,11 @@ namespace Byte_Bank
 
         private static void ListarContas()
         {
-            ListaDeContaCorrente lista = new ListaDeContaCorrente();
+            var lista = new ListaDeContaCorrente();
 
-            ContaCorrente contaLuiz = new ContaCorrente(1111, 111111);
+            var contaLuiz = new ContaCorrente(1111, 111111);
 
-            ContaCorrente[] contas = new ContaCorrente[]
+            var contas = new ContaCorrente[]
             {
                 new ContaCorrente(874, 7840087),
                 new ContaCorrente(875, 7845787),
@@ -168,12 +172,36 @@ namespace Byte_Bank
             );
 
             lista.Adicionar(contaLuiz);
-            
 
             for (int i = 0; i < lista.Tamanho; i++)
             {
-                ContaCorrente itemAtual = lista.GetItemNoIndice(i);
+                var itemAtual = lista.GetItemNoIndice(i);
                 Console.WriteLine($"Item na Posição {i} = Conta {itemAtual.Numero} / {itemAtual.Agencia}");
+            }
+        }
+
+        private static void OrdernaContas()
+        {
+
+            var contas = new List<ContaCorrente>()
+            {
+                new ContaCorrente(341, 57480),
+                new ContaCorrente(342, 45678),
+                new ContaCorrente(340, 48950),
+                null,
+                new ContaCorrente(290, 18950),
+                null
+            };
+
+            //contas.Sort();
+            // contas.Sort(new ComparadorContaCorrentePorAgencia());
+            var contasOrdenadas = contas
+                .Where(conta => conta != null)
+                .OrderBy(conta => conta.Numero);
+
+            foreach (var conta in contasOrdenadas)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
             }
         }
     }
