@@ -1,11 +1,11 @@
-﻿using Byte_Bank.Comparadores;
-using Byte_Bank.Extensoes;
-using ByteBank;
+﻿using ByteBank;
 using ByteBank.Funcionarios;
 using ByteBank.Sistemas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Text;
 
 namespace Byte_Bank
 {
@@ -18,11 +18,15 @@ namespace Byte_Bank
             // TransferirSaldo();
             // CarregarContas();
             // ListarContas();
-            OrdernaContas();
+            // OrdernaContas();
+            //CarregarArquivoDeContas();
+            CriarArquivo();
+
+
             Console.ReadLine();
         }
 
-        public static void UsarSistema()
+        static void UsarSistema()
         {
             var sistemaInterno = new SistemaInterno();
 
@@ -42,7 +46,7 @@ namespace Byte_Bank
             sistemaInterno.Logar(parceiro, "123456");
         }
 
-        public static void CalcularBonificacao()
+        static void CalcularBonificacao()
         {
             var gerenciadorBonificacao = new GerenciadorBonificacao();
 
@@ -70,7 +74,7 @@ namespace Byte_Bank
             Console.WriteLine("Total de bonificações do mês " + gerenciadorBonificacao.GetTotalBonificacao());
         }
 
-        public static void TransferirSaldo()
+        static void TransferirSaldo()
         {
             try
             {
@@ -137,7 +141,7 @@ namespace Byte_Bank
             }
         }
 
-        private static void CarregarContas()
+        static void CarregarContas()
         {
             using (var leitor = new LeitorDeArquivo("contas.txt"))
             {
@@ -147,7 +151,7 @@ namespace Byte_Bank
             }
         }
 
-        private static void ListarContas()
+        static void ListarContas()
         {
             var lista = new ListaDeContaCorrente();
 
@@ -180,7 +184,7 @@ namespace Byte_Bank
             }
         }
 
-        private static void OrdernaContas()
+        static void OrdernaContas()
         {
 
             var contas = new List<ContaCorrente>()
@@ -202,6 +206,54 @@ namespace Byte_Bank
             foreach (var conta in contasOrdenadas)
             {
                 Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
+        }
+
+        static void CarregarArquivoDeContas()
+        {
+            var enderecoDoArquivo = "C:/Users/Thiago/source/repos/Byte_Bank/Byte_Bank/Dados/contas.txt";
+
+            using (var fluxoDoArquivo = new FileStream(enderecoDoArquivo, FileMode.Open))
+            using (var leitor = new StreamReader(fluxoDoArquivo))
+            {
+                while (!leitor.EndOfStream)
+                {
+                    var linha = leitor.ReadLine();
+                    var contaCorrente = ConverterStringParaContaCorrente(linha);
+                    var msg = $"{contaCorrente.Titular.Nome} : Conta Número {contaCorrente.Numero}, ag. {contaCorrente.Agencia}. Saldo: {contaCorrente.Saldo}";
+                    Console.WriteLine(msg);
+                }
+            } 
+        }
+
+        static ContaCorrente ConverterStringParaContaCorrente(string linha)
+        {
+            var campos = linha.Split(' ');
+
+            var agencia = int.Parse(campos[0]);
+            var numero = int.Parse(campos[1]);
+            var saldo = double.Parse(campos[2].Replace('.', ','));
+            var nomeTitular = campos[3];
+
+            var titular = new Cliente();
+            titular.Nome = nomeTitular;
+
+            var resultado = new ContaCorrente(agencia, numero);
+            resultado.Depositar(saldo);
+            resultado.Titular = titular;
+
+            return resultado;
+        }
+
+        static void CriarArquivo()
+        {
+            var caminhoNovoArquivo = "C:/Users/Thiago/source/repos/Byte_Bank/Byte_Bank/Dados/contasExportadas.csv";
+
+            using (var fluxoDeArquivo = new FileStream(caminhoNovoArquivo, FileMode.CreateNew))
+            using (var escritor = new StreamWriter(fluxoDeArquivo, Encoding.UTF8))
+            {
+                escritor.Write("456, 78945,4785.50,Gustavo Santos");
+                Console.WriteLine("Arquivo criado com sucesso");
             }
         }
     }
